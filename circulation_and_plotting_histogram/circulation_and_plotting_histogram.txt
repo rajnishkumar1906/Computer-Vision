@@ -1,0 +1,20 @@
+A histogram is a graphical representation of the distribution of pixel intensities in an image
+
+
+             ------------->Brightness    : 
+             |
+             |          
+Histogram ---+------------>Dynamic Range : Shows how well the intensity values are distributed.
+             |
+             |
+             ------------->Equalization  : Equalizing the image can enhance the image
+
+
+
+
+
+to think about ----> Saturation , spikes, values
+
+
+pixel value in higher range => image is bright
+pixel value in lower range => image is dark

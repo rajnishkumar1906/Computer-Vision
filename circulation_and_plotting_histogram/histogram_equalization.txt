@@ -1,0 +1,27 @@
+Histogram Equalization
+======================
+
+Histogram Equalization is a technique to enhance the contrast of an image by redistributing its intensity values across the full
+----------------------------------------------------------------------------------------------------------------------
+
+Step1 : calculate the Histogram
+--------------------------------
+The histogram shows the frequency of each intensity value(brightness)
+in the image
+
+
+Step2 : Compute the cumulative distribution Function
+----------------------------------------------------
+The CDF accumulates the frequencies of intensity levels. It helps us understand how
+the intensity values are distributed across the image.
+
+
+Step3 : Map Intensity values
+----------------------------
+Using the CDF, the old intensity values are mappped to new ones
+so that the distribution spreads across the entire intensity range
+
+
+Step4 : Generate the Equalized image
+------------------------------------
+Replace the old pixel intensities with the new mapped values

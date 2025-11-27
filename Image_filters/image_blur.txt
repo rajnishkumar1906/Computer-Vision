@@ -1,0 +1,19 @@
+Blurring is a technique which reduces the sharp transitions in an image by averaging pixel values in a local neighbour.
+
+Blurring(average)
+1. Reducing noise
+2. Smoothing images
+
+Blurring ---> Average blur  -> Each pixel in the output image is the average of the surrounding pixel within the kernel window.
+ |\                            (for simple normal blurring)
+ | \
+ |  \
+ |  \/
+ |  Gaussian blur -> Gaussian blur uses a weighted average , where pixels closer to the center have more influence. 
+ |                   This produces a smoother and more natiral blur
+ |                    (for quality blurring)
+ |
+\ /
+Median Blur -> Median blur replaces each pixel with median of the surrounding pixels , 
+               effective at removing salt and pepper noise
+            (to reduce more noise)

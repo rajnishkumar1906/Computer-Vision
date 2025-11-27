@@ -1,0 +1,47 @@
+""" Convolution operation """
+
+A image filter is a set of rules that we apply to an image to extract or emphasize certain features
+Filter :
+    1. Sharpens
+    2. Smoothens
+    3. Enhances
+Filter depends on kernel , which is a 3*3 or 5*5 or N*N matrix 
+which determines how filter operates
+
+Filter is name of filter and kernel is a matrix.
+
+Filter and kernel are slightly different.
+
+3*3 kernel known as horizontal filter.
+
+
+
+Image = 5*5
+kernel/filter = 3*3
+stride = 1 (stride is no. of step movement)
+output_dim = 5-3+1 = 3 (e.g., 3*3)
+
+
+
+pixel intensity ranges 0 to 255
+
+if pixel < 0 => set clip to 0
+if pixel > 255 => set clip to 255
+
+MIN-MAX Normalization
+Vnew = ((V - min)/(max-min))*255 gives output iin range -1 to to 1
+
+
+
+'''''' 
+Filter is  responsible for extracting edges and 
+''''''
+
+
+
+-1 -1 -1   ----> value1 = low
+ 0  0  0   ----> value2 = neutral
+ 1  1  1   ----> value3 = high
+
+low + -n-e-u-t-r-a-l- + high ---> Big value means presence of horizontal edge 
+                      ---> 0 , no horizontal edge

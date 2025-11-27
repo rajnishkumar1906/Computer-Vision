@@ -1,0 +1,116 @@
+Edges represent sharp changes in intensity (or color) in an image.
+These changes often correspond to object boundaries, textures , or other key features
+
+
+              ---->Feature Extraction
+             /
+            /                     ----->Detect Shapes
+           /                     /
+  Edge    /                     /
+Detection ------->Shape Analysis------->Contours
+          \                     \
+           \                     \
+            \                     ----->boundaries
+             \
+              ---->Preprocessing
+
+
+              ---->Sobel Filter
+             /
+            /                   
+           /                     
+  Edge    /                     
+Detection ------->Laplacian Filter
+          \                     
+           \                    
+            \                   
+             \
+              ---->Canny Edge Detector
+
+
+Sobel Filter
+--------------
+The sobel filter detects edges in horizontal and vertical directions by calcuating gradients.
+Beloe filters mathematically mirrors the derivate operation.
+
+horizontal                     vertical 
+  kernel(Gx)                    kernel (Gy)
+     \                            /
+      \                          /
+       \                        /
+        \                      /
+         \                    /
+          \                  /
+           \ |=============|/
+             | Convolution |
+             |=============|
+                 IGx , IGy
+
+      combining gradients
+            ____________
+      G = \/ Gx^2 + Gy^2         calculate magnitude of gradients of each pixel
+            ___________________________
+      G = \/  IGx[0][0]^2 + IGy[0][0]^2  = value
+
+
+
+Laplacian Filter
+-----------------
+Laplacian detects edges by finding regions of rapid intensity change .
+Unlike sobel , it combines x and y direction derivatives in a single operation
+
+The laplacian kernel below is a discrete approximation of this continuous mathematical
+derivative. Below filters mathematically mirrors the derivative operation.
+
+|            |                  |           |
+|            |                  |           |
+|            |                  |           |   
+   kernel 1                        kernel2
+
+
+Canny Edge
+The canny algorithm detects edges using multi-step processing ,
+combining sobel and thresholding techniques
+
+Step 1   : Convert to grayscale because edges are present in color change information not in colors
+Step 2   : Apply Gaussian Blur which adds smoothness to image it less sensitive to small color
+           change variations
+Step 3.1 : Compute intensity Gradients using Sobel operator to approximate the first derevatives in    
+           x and y-directions
+Step 3.2 : Calculate magnitube but we also need angle of the edge and we can get using:
+
+            thita = arc tangent(Gy/Gx)
+
+
+Step 4 : Non-maximum Supression.
+
+        -> For each pixel , compare the gradient magnitude to its two neighbour along the gradient direction
+        -> if pixel'sgradient is not the largest , supress (set to 0).
+
+Example : 
+      Gradient direction : 45 degree
+      compare G(x,y)------->   G(x+1,y+1)
+                  |
+                  |-------->   G(x+1,y-1)
+
+
+Step 5 :  Double thresholding
+          -> High Threshold : Pixels above this are string edges.
+          -> Low threshold  : Pixels below this are supressed entirely.
+          -> Pixels between the two thresholds are classified as weak edges.
+
+                  High threshold = 100
+                  Low threshold = 50
+
+                  G  > 100   :  Strong edge
+                  50 < G  <= 100    :  Weak edge
+                  G <= 50 : Supressed (Not an edge)
+
+
+Step 6 : Edge Trackiong by Hysteresis
+          ->In this final step , weak edges are either kept or discarded based on their
+             connectivity to strong edges.
+          ->If a weak edge is connected to a strong edge, it is retained else discarded.
+
+Canny combines several techniques (Gaussian blue, Sobel, thresholds) to ensure edges are
+clean and noise-free.
